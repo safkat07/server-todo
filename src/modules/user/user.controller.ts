@@ -2,12 +2,14 @@ import { Request, Response } from "express";
 import { pool } from "../../config/db";
 import { userServices } from "./userServices";
 
+const { createUsers, getAllUser } = userServices;
+
 const createUser = async (req: Request, res: Response) => {
   // console.log(req.body)
   const { name, email, age } = req.body;
   //query to send info in DB
   try {
-    const result = await userServices.createUser(name, email, age);
+    const result = await createUsers(name, email, age);
     // console.log(result.rows[0]);
     res.status(201).json({
       success: true,
@@ -24,7 +26,8 @@ const createUser = async (req: Request, res: Response) => {
 
 const getUser = async (req: Request, res: Response) => {
   try {
-    const result = await pool.query(`SELECT * FROM users`);
+    const result = await getAllUser();
+
     res.status(200).json({
       success: true,
       message: "Users Retried Sucessfully",
