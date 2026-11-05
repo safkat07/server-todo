@@ -7,25 +7,15 @@ import { todoRoutes } from "./modules/todo/todoRoutes";
 
 const app = express();
 const port = config.port;
-//parser
 app.use(express.json());
-//initialize database
 initDB();
 
 app.get("/", logger, (req: Request, res: Response) => {
   res.send("Hello World! hello");
 });
 
-//post users data into DB
 app.use("/users", userRoutes);
-
-/*------------------TODO TABLE CRUD----------------*/
-
-//post todo
 app.use("/todos", todoRoutes);
-
-
-
 
 //not found route
 app.use((req, res) => {
