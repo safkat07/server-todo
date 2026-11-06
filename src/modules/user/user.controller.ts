@@ -4,10 +4,10 @@ import { userServices } from "./userServices";
 
 const createUser = async (req: Request, res: Response) => {
   // console.log(req.body)
-  const { name, email, age } = req.body;
+  const { name, email, age, password } = req.body;
   //query to send info in DB
   try {
-    const result = await userServices.createUsers(name, email, age);
+    const result = await userServices.createUsers(req.body);
     // console.log(result.rows[0]);
     res.status(201).json({
       success: true,

@@ -3,26 +3,27 @@ import config from ".";
 
 //db
 export const pool = new Pool({
-    connectionString: `${config.connectection_str}`
-})
+  connectionString: `${config.connectection_str}`,
+});
 
 const initDB = async () => {
-    //user table
-    await pool.query(`
+  //user table
+  await pool.query(`
         CREATE TABLE IF NOT EXISTS users(
         id SERIAL PRIMARY KEY,
         name VARCHAR(100) NOT NULL,
         email VARCHAR(150) UNIQUE NOT NULL,
+        password TEXT NOT NULL,
         age INT,
         phone VARCHAR(15),
         address TEXT,
         created_at TIMESTAMP DEFAULT NOW(),
         updated_at TIMESTAMP DEFAULT NOW()
         )    
-        `)
+        `);
 
-    //todo table
-    await pool.query(`
+  //todo table
+  await pool.query(`
         CREATE TABLE IF NOT EXISTS todos(
         id SERIAL PRIMARY KEY,
         user_id INT REFERENCES users(id) ON DELETE CASCADE,
@@ -33,7 +34,7 @@ const initDB = async () => {
         created_at TIMESTAMP DEFAULT NOW(),
         updated_at TIMESTAMP DEFAULT NOW()
         )
-            `)
-}
+            `);
+};
 
-export default initDB
+export default initDB;
