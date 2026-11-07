@@ -8,7 +8,7 @@ const { createUser, getUser, getUserID, updateUser, deleteUser } =
   userController;
 
 router.post("/", createUser);
-router.get("/", auth(), getUser);
+router.get("/", auth("admin"), getUser);
 router.get("/:id", getUserID);
 router.put("/:id", updateUser);
 router.delete("/:id", deleteUser);

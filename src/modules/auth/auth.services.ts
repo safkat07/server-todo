@@ -24,6 +24,7 @@ const loginUser = async (email: string, password: string) => {
     {
       name: user.name,
       email: user.email,
+      role: user.role,
     },
     config.secret as string,
     { expiresIn: "1h" },

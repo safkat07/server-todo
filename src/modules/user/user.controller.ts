@@ -4,7 +4,7 @@ import { userServices } from "./userServices";
 
 const createUser = async (req: Request, res: Response) => {
   // console.log(req.body)
-  const { name, email, age, password } = req.body;
+  const { name, email, age, password, role } = req.body;
   //query to send info in DB
   try {
     const result = await userServices.createUsers(req.body);
